@@ -20,19 +20,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="HotSpot采用了惰性评估(Lazy Evaluation)的做法，根据二八定律， 消耗大部分系统资源的只有那一小部分的代码（热点代码），而这也就是JIT所需要编译的部分。 JVM会根据代码每次被执行的情况收集信息并相应地做出一些优化，因此执行的次数越多，它的速度就越快。 JDK 9引入了一种新的编译模式AOT(Ahead of Time Compilation)，它是直接将字节码编译成机器码，">
+  <meta name="description" content="Netty 框架的学习什么是Netty     Netty是由 JBOSS 提供的一个Java开源框架。     Netty 是一个异步的、基于事件驱动的网络引用框架，用以快速开发高性能、高可靠性的网络IO程序。     Netty主要针对在TCP协议下，面向Clients端的高并发应用，或者Peer-to-Peer场景下的大量数据持续传输的应用     Netty本质是一个NIO框架，适用于服务">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hanck&#39;s space">
-<meta property="og:url" content="http://example.com/2022/09/10/JVMmd/index.html">
+<meta property="og:title" content="netty框架">
+<meta property="og:url" content="http://example.com/2022/09/18/netty%E6%A1%86%E6%9E%B6/index.html">
 <meta property="og:site_name" content="hanck&#39;s space">
-<meta property="og:description" content="HotSpot采用了惰性评估(Lazy Evaluation)的做法，根据二八定律， 消耗大部分系统资源的只有那一小部分的代码（热点代码），而这也就是JIT所需要编译的部分。 JVM会根据代码每次被执行的情况收集信息并相应地做出一些优化，因此执行的次数越多，它的速度就越快。 JDK 9引入了一种新的编译模式AOT(Ahead of Time Compilation)，它是直接将字节码编译成机器码，">
+<meta property="og:description" content="Netty 框架的学习什么是Netty     Netty是由 JBOSS 提供的一个Java开源框架。     Netty 是一个异步的、基于事件驱动的网络引用框架，用以快速开发高性能、高可靠性的网络IO程序。     Netty主要针对在TCP协议下，面向Clients端的高并发应用，或者Peer-to-Peer场景下的大量数据持续传输的应用     Netty本质是一个NIO框架，适用于服务">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-09-10T08:41:38.776Z">
-<meta property="article:modified_time" content="2022-04-26T12:17:45.298Z">
+<meta property="og:image" content="d:\hexo\myBlog\source\images\image-20220918160323200.png">
+<meta property="article:published_time" content="2022-09-18T07:58:05.000Z">
+<meta property="article:modified_time" content="2022-09-18T08:36:58.497Z">
 <meta property="article:author" content="hanckccc">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:\hexo\myBlog\source\images\image-20220918160323200.png">
 
-<link rel="canonical" href="http://example.com/2022/09/10/JVMmd/">
+<link rel="canonical" href="http://example.com/2022/09/18/netty%E6%A1%86%E6%9E%B6/">
 
 
 <script id="page-configurations">
@@ -45,7 +47,7 @@
   };
 </script>
 
-  <title> | hanck's space</title>
+  <title>netty框架 | hanck's space</title>
   
 
 
@@ -150,7 +152,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/10/JVMmd/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/18/netty%E6%A1%86%E6%9E%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,7 +165,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          netty框架
         </h1>
 
         <div class="post-meta">
@@ -172,16 +174,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2022-09-10 16:41:38" itemprop="dateCreated datePublished" datetime="2022-09-10T16:41:38+08:00">2022-09-10</time>
+              <time title="创建时间：2022-09-18 15:58:05 / 修改时间：16:36:58" itemprop="dateCreated datePublished" datetime="2022-09-18T15:58:05+08:00">2022-09-18</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-26 20:17:45" itemprop="dateModified" datetime="2022-04-26T20:17:45+08:00">2022-04-26</time>
-              </span>
 
           
 
@@ -194,15 +190,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>HotSpot采用了惰性评估(Lazy Evaluation)的做法，根据二八定律，</p>
-<p>消耗大部分系统资源的只有那一小部分的代码（热点代码），而这也就是JIT所需要编译的部分。</p>
-<p>JVM会根据代码每次被执行的情况收集信息并相应地做出一些优化，因此执行的次数越多，它的速度就越快。</p>
-<p>JDK 9引入了一种新的编译模式AOT(Ahead of Time Compilation)，它是直接将字节码编译成机器码，这样就避免了JIT预热等各方面的开销。JDK支持分层编译和AOT协作使用。</p>
-<p>但是 ，AOT 编译器的编译质量是肯定比不上 JIT 编译器的。</p>
-<p>程序计数器</p>
-<p>​	程序计数器（Program Counter Register）是一块较小的内存空间，它可以看作是当前线程所执行的 字节码的行号指示器。字节码解释器工作时就是通过改变这个计数器 的值来选取下一条需要执行的字节码指令，<strong>它是程序控制流的指示器，分支、循环、跳转、异常处 理、线程恢复等基础功能都需要依赖这个计数器来完成。</strong></p>
-<p>​	由于Java虚拟机的多线程是通过线程轮流切换、分配处理器执行时间的方式来实现的，在任何一 个确定的时刻，一个处理器（对于多核处理器来说是一个内核）都只会执行一条线程中的指令。因 此，<strong>为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，各条线程 之间计数器互不影响，独立存储，我们称这类内存区域为“线程私有”的内存。</strong></p>
+        <h2 id="Netty-框架的学习"><a href="#Netty-框架的学习" class="headerlink" title="Netty 框架的学习"></a>Netty 框架的学习</h2><h1 id="什么是Netty"><a href="#什么是Netty" class="headerlink" title="什么是Netty"></a>什么是Netty</h1><ol>
+    <li>Netty是由 JBOSS 提供的一个Java开源框架。</li>
+    <li>Netty 是一个异步的、基于事件驱动的网络引用框架，用以快速开发高性能、高可靠性的网络IO程序。</li>
+    <li>Netty主要针对在TCP协议下，面向Clients端的高并发应用，或者Peer-to-Peer场景下的大量数据持续传输的应用</li>
+    <li>Netty本质是一个NIO框架，适用于服务器相关的多种应用场景</li>
+    <li>要透彻理解Netty，需要先学习NIO，这样我们才能阅读Netty源码</li>
+</ol>
 
+<h3 id="1-什么是同步和异步"><a href="#1-什么是同步和异步" class="headerlink" title="1.什么是同步和异步"></a>1.什么是同步和异步</h3><p><img src="D:\hexo\myBlog\source\images\image-20220918160323200.png" alt="image-20220918160323200"></p>
+<h4 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h4><p>同步 指 浏览器 发送一条请求，需要等待服务器处理请求并且响应返回之后，才能继续发送另外的请求</p>
+<h4 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h4><p>异步 指 浏览器 可以同时发送多次请求，不需要等待服务器相关处理。</p>
+<h2 id="2-I-x2F-O-模型"><a href="#2-I-x2F-O-模型" class="headerlink" title="2. I &#x2F; O 模型"></a>2. I &#x2F; O 模型</h2><ol>
+    <li>
+        I/O模型简单的理解:就是用什么样的通道进行数据的发送和接收，很大程度上决定了程序通信的性能
+    </li>
+    <li>
+        Java共支持3种网络编程模型/lO模式:&nbsp&nbsp&nbsp<em><b>BIO、NIO、AIO</b></em>
+    </li>
+    <li>
+        Java BIO:同步并阻塞(传统阻塞型)，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销
+    </li>
+    <li>
+        Java NIO:同步非阻塞，服务器实现模式为一个线程处理多个请求(连接)，即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有VIO请求就进行处理
+    </li>
+    <li>
+        Java AIO(NIO.2):异步非阻塞，AlO引入异步通道的概念，采用了Proactor模式，简化了程序编写，有效的请求才启动线程，它的特点是先由操作系统完成后才通知服务端程序启动线程去处理，一般适用于连接数较多且连接时间较长的应用
+    </li>
+</ol>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
     </div>
 
     
@@ -217,12 +234,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/09/10/JUC%E5%B9%B6%E5%8F%91/" rel="prev" title="">
-      <i class="fa fa-chevron-left"></i> 
+    <a href="/2022/09/12/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" rel="prev" title="我的第一篇博客">
+      <i class="fa fa-chevron-left"></i> 我的第一篇博客
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/09/10/Spring%20security%20%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="next" title="">
-       <i class="fa fa-chevron-right"></i>
+    <a href="/2022/09/18/AQS%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" rel="next" title="AQS源码解析">
+      AQS源码解析 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -282,6 +299,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Netty-%E6%A1%86%E6%9E%B6%E7%9A%84%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">Netty 框架的学习</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFNetty"><span class="nav-number"></span> <span class="nav-text">什么是Netty</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5"><span class="nav-number">0.1.</span> <span class="nav-text">1.什么是同步和异步</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5"><span class="nav-number">0.1.1.</span> <span class="nav-text">同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5"><span class="nav-number">0.1.2.</span> <span class="nav-text">异步</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-I-x2F-O-%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">2. I &#x2F; O 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
